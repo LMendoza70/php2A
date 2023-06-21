@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vista de logueo ...</title>
+  </head>
+  <body>
+    <header>
+      <h1>Vista de logueo</h1>
+    </header>
+    <section>
+      <form action="../Controller/loginController.php" method="post">
+        <div class="formgrup">
+          <label for="user">Usuario : </label>
+          <input type="text" name="user" id="user" placeholder="Usuario..." />
+        </div>
+        <div class="formgrup">
+          <label for="password">Password : </label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <div class="formgrup">
+          <input type="submit" value="Login..." />
+        </div>
+      </form>
+    </section>
+    <footer>
+      <h3>Ejemplo MVC</h3>
+    </footer>
+  </body>
+</html>
