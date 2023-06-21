@@ -47,9 +47,52 @@
                 $user=false;
             }
             //cerramos la coneccion
-            -$this->dbconnection->closeConnection();
+            $this->dbconnection->closeConnection();
             //arrojamos resultados
             return $user;
         }
+
+        //metodo para validar un logueo (usuario y contraseña)
+        public function getCredentials($us, $ps){
+            //paso1 creamos la consulta
+            $sql="SELECT * FROM user WHERE Usuario=$us AND Password=$ps";
+            //paso 2 conectamos a la base de datos
+            $connection =$this->dbconnection->getConnection();
+            //paso 3 ejecutamos la consulta
+            $reslt = $connection->query($sql);
+            //paso 4 preparamos la respuesta
+            if($reslt && $reslt->num_rows > 0){
+                $user=$reslt->fetch_assoc();
+            }else{
+                $user=false;
+            }
+            //paso 5 cerramos la coneccion
+            $this->dbconnection->closeConnection();
+            //paso 6 arrojamos resultados
+            return $user;
+        }
+
+        //metodo para eliminar un usuario
+        public function deleteRow($id){
+            //paso1 creamos la consulta
+            $sql="DELETE FROM user WHERE IdUser=$id";
+            //paso 2 conectamos a la base de datos
+            $connection =$this->dbconnection->getConnection();
+            //paso 3 ejecutamos la consulta
+            $reslt = $connection->query($sql);
+            //paso 4 preparamos la respuesta
+            if($reslt){
+                $res=true;
+            }else{
+                $res=false;
+            }
+            //paso 5 cerramos la coneccion
+            $this->dbconnection->closeConnection();
+            //paso 6 arrojamos resultados
+            return $res;
+        }
+        //metodo para editar un usuario
+
+        // metodo para insertar un usuario
     }
 ?>
