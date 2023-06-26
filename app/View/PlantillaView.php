@@ -22,7 +22,7 @@
     </header>
     <section class="content">
       <!--Aqui va a ir todo lo que pueda ser contenido de la plantilla -->
-      <?php $vista ?>
+      <?php include_once($vista) ?>
     </section>
     <footer class="footer">
       <h3>Derechos reservados...</h3>
