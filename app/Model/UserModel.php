@@ -35,14 +35,14 @@
         //metodo para obtener a un usuario por su ID
         public function getById($id){
             //creamos consulta
-            $sql="SELECT * FROM user WHERE IdUser=$id";
+            $sql="SELECT * FROM user WHERE IdUser='".$id."'";
             //obtenemos la coneccion 
             $connection=$this->dbconnection->getConnection();
             //ejecutamos la consulta
             $reslt=$connection->query($sql);
             //verificamos que traiga datos y los sacamos a una variable
             if($reslt && $reslt->num_rows > 0){
-                $user=$reslt->fethc_assoc();
+                $user=$reslt->fetch_assoc();
             }else{
                 $user=false;
             }
@@ -91,7 +91,7 @@
             //paso 6 arrojamos resultados
             return $res;
         }
-        //metodo para editar un usuario
+        
 
         // metodo para insertar un usuario
         public function insert($user){
@@ -99,6 +99,28 @@
             $sql="INSERT INTO user(Nombre, ApPaterno, ApMaterno, Usuario, Password, Sexo, FchNacimiento) 
             VALUES('".$user['Nombre']."','".$user['ApPaterno']."','".$user['ApMaterno']."',
             '".$user['Usuario']."','".$user['Password']."','".$user['Sexo']."','".$user['FchNacimiento']."')";
+            //paso 2 conectamos a la base de datos
+            $connection =$this->dbconnection->getConnection();
+            //paso 3 ejecutamos la consulta
+            $reslt = $connection->query($sql);
+            //paso 4 preparamos la respuesta
+            if($reslt){
+                $res=true;
+            }else{
+                $res=false;
+            }
+            //paso 5 cerramos la coneccion
+            $this->dbconnection->closeConnection();
+            //paso 6 arrojamos resultados
+            return $res;
+        }
+
+        //metodo para editar un usuario
+        public function update($user){
+            //paso1 creamos la consulta
+            $sql="UPDATE user SET Nombre='".$user['Nombre']."', ApPaterno='".$user['ApPaterno']."', 
+            ApMaterno='".$user['ApMaterno']."', Usuario='".$user['Usuario']."', Password='".$user['Password']."', 
+            Sexo='".$user['Sexo']."', FchNacimiento='".$user['FchNacimiento']."' WHERE IdUser=".$user['IdUser'];
             //paso 2 conectamos a la base de datos
             $connection =$this->dbconnection->getConnection();
             //paso 3 ejecutamos la consulta

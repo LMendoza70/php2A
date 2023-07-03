@@ -5,6 +5,7 @@
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, voluptatum itaque, asperiores minima iusto, odit quam omnis commodi nihil similique quidem obcaecati culpa? Rem nisi, perferendis omnis doloribus voluptatem quod.
   </p>
   <p>
+    <!--Agregamos enlace para agregar un nuevo usuario-->
     <a href="http://localhost/php3a/?c=UserController&m=CallFormAdd">Agregar nuevo usurio</a>
   </p>
   <br>
@@ -25,7 +26,8 @@
         echo "<td>" . $dato['ApPaterno'] ."</td>";
         echo "<td>" . $dato['ApMaterno'] ."</td>";
         echo "<td>" . $dato['Usuario'] ."</td>";
-        echo "<td> <a href=''> Editar </a><br><a href=''> Eliminar </a>  </td>";
+        echo "<td> <a href='http://localhost/php3a/?c=UserController&m=CallFormEdit&id=".$dato['IdUser']."'> Editar </a><br>
+        <a href=''> Eliminar </a>  </td>";
         echo "</tr>";
        }
       ?>
