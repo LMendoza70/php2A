@@ -6,7 +6,7 @@
         //creamos el constructor de la clase coneccion en este metodo conectamos con la DB
         public function __construct(){
             //llamamos al archivo de configuracion 
-            require_once('./config.php');
+            require_once('app/config/config.php');
             //creamos nuestra coneccion a la base de datos
             $this->connection=new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
             //manejo de errores 

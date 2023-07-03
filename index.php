@@ -14,12 +14,13 @@ define('controladores','app/Controller/');
 //operador ternario  variable=condicion?verdadero:falso
 //verifica si es que se le paso la variable c desde la url en ese 
 //caso la variable control toma ese valor 
-$control=isset($_GET['c'])? $_get['c']:'';
+$control=isset($_GET['c'])? $_GET['c']:'';
 //creamos la reuta al controlador que queremos invocar 
-$file=controladores.$control.'php';
+$file=controladores.$control.'.php';
 //verificamos si la rita creada es correcta
 if(!empty($control) && file_exists($file)){
     //si existe la ruta y existe el archivo creamos un objeto del controlador 
+    include_once $file;
     $objeto=new $control();
     //verificamos si le pasamos desde la url la variable m
     $metodo=isset($_GET['m'])?$_GET['m']:'';

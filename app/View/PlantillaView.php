@@ -11,12 +11,12 @@
       <h1>Catando Ando Coffee Shop</h1>
       <nav class="navbar">
         <ul>
-          <li><a href="">Inicio</a></li>
-          <li><a href=""></a>Prductos</li>
-          <li><a href=""></a>Variedades</li>
-          <li><a href=""></a>Presentaciones</li>
-          <li><a href=""></a>Usuarios</li>
-          <li><a href=""></a>Inicio</li>
+          <li><a href="http://localhost/php3a/">Inicio</a></li>
+          <li><a href="http://localhost/php3a/?c=ProductsController&m=index">Prductos</a></li>
+          <li><a href="http://localhost/php3a/?c=VarietalsController&m=index">Variedades</a></li>
+          <li><a href="http://localhost/php3a/?c=PresentsController&m=index">Presentaciones</a></li>
+          <li><a href="http://localhost/php3a/?c=UserController&m=index">Usuarios</a></li>
+          <li><a href="http://localhost/php3a/?c=UserController&m=CallFormLogin">Login</a></li>
         </ul>
       </nav>
     </header>

@@ -6,7 +6,7 @@
         //creamos el constructos para conectar desde ahi con la base de datos 
         public function __construct(){
             //llamamos a la clase coneccion para vincular el model user con la base de datos 
-            require_once('../config/BDConnection.php');
+            require_once('app/config/BDConnection.php');
             //creamos la instancia de la coneccion a la base de datos en dbconnection
             $this->dbconnection=new BDConnection();
         }
@@ -23,13 +23,13 @@
             //creamos un arreglo para manipulat a result
             $users=array();
             //vamos a decomponer a result desde un ciclo
-            while($user=$result->fethc_assoc()){
+            while($user=$result->fetch_assoc()){
                 $users[]=$user;
             }
             //cerramos la coneccion a la base de datos 
             $this->dbconnection->closeConnection();
             //arrojamos la respuesta de nuestra consulta "users"
-            return $users
+            return $users;
         }
 
         //metodo para obtener a un usuario por su ID
@@ -94,5 +94,26 @@
         //metodo para editar un usuario
 
         // metodo para insertar un usuario
+        public function insert($user){
+            //paso1 creamos la consulta
+            $sql="INSERT INTO user(Nombre, ApPaterno, ApMaterno, Usuario, Password, Sexo, FchNacimiento) 
+            VALUES('".$user['Nombre']."','".$user['ApPaterno']."','".$user['ApMaterno']."',
+            '".$user['Usuario']."','".$user['Password']."','".$user['Sexo']."','".$user['FchNacimiento']."')";
+            //paso 2 conectamos a la base de datos
+            $connection =$this->dbconnection->getConnection();
+            //paso 3 ejecutamos la consulta
+            $reslt = $connection->query($sql);
+            //paso 4 preparamos la respuesta
+            if($reslt){
+                $res=true;
+            }else{
+                $res=false;
+            }
+            //paso 5 cerramos la coneccion
+            $this->dbconnection->closeConnection();
+            //paso 6 arrojamos resultados
+            return $res;
+        }
+            
     }
 ?>
