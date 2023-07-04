@@ -7,9 +7,9 @@
         public function index(){
             //inicializamos el atributo vista que contendra la ruta de pa pantalla a 
             //mostrar dentro de nuestra plantilla 
-            $vista="app/View/HomeView.php";
+            $vista="app/View/admin/HomeView.php";
             //incluimos al archivo de la plantilla para que este sea llmado y lleve como variable a vista
-            include_once("app/View/PlantillaView.php");
+            include_once("app/View/admin/PlantillaView.php");
         }
     }
 ?>

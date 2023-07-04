@@ -3,8 +3,8 @@
         private $vista;
 
         public function index(){
-            $vista='app/View/IndexProductsView.php';
-            include_once('app/view/PlantillaView.php');
+            $vista='app/View/admin/products/IndexProductsView.php';
+            include_once('app/view/admin/PlantillaView.php');
         }
     }
 ?>

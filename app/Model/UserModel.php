@@ -136,6 +136,26 @@
             //paso 6 arrojamos resultados
             return $res;
         }
+
+        //metodo para eliminar un usuario por su ID
+        public function delete($id){
+            //paso1 creamos la consulta
+            $sql="DELETE FROM user WHERE IdUser=$id";
+            //paso 2 conectamos a la base de datos
+            $connection =$this->dbconnection->getConnection();
+            //paso 3 ejecutamos la consulta
+            $reslt = $connection->query($sql);
+            //paso 4 preparamos la respuesta
+            if($reslt){
+                $res=true;
+            }else{
+                $res=false;
+            }
+            //paso 5 cerramos la coneccion
+            $this->dbconnection->closeConnection();
+            //paso 6 arrojamos resultados
+            return $res;
+        }
             
     }
 ?>

@@ -71,12 +71,11 @@
     </p>
     <p>
       <input
-        type="text"
+        type="hidden"
         name="id"
         value="<?= $datos['IdUser'] ?>"
         readonly
         id="id"
-        
       />
     </p>
     <p><input type="submit" value="Edit" /></p>
