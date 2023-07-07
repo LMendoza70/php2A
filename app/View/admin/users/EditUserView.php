@@ -1,7 +1,7 @@
 <div>
   <h2>Actualizacion de datos de usuario</h2>
   <!--en el metodo action de este formulario llamaremos al metodo Add de nuestro controlador -->
-  <form action="http://localhost/php3a/?c=UserController&m=Edit" method="post">
+  <form action="http://localhost/php3a/?c=UserController&m=Edit" method="post" enctype="multipart/form-data">
     <p>
       <label for="nombre">Nombre : </label><br />
       <input
@@ -68,6 +68,10 @@
         placeholder="dd-mm-aaaa"
         value="<?= $datos['FchNacimiento'] ?>"
       />
+    </p>
+    <p>
+      <label for="avatar">Avatar de usuario : </label><br>
+      <input type="file" name="avatar" id="avatar" accept="image/*" value="<?= $datos['Avatar'] ?>" />
     </p>
     <p>
       <input

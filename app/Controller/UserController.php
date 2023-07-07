@@ -31,9 +31,46 @@ include_once("app/Model/UserModel.php");
                         'Sexo'=>$_POST['sexo'],
                         'FchNacimiento'=>$_POST['fchnac']
                     );
+
+                    //rescatamos la imagen y la procesamos 
+                    if(isset($_FILES['avatar']) && $_FILES['avatar']['error']===UPLOAD_ERR_OK){
+                        //obtenemos los datos de la imagen que  cargamos en el formulario
+                        $nombreArchivo=$_FILES['avatar']['name'];
+                        $tipoArchivo=$_FILES['avatar']['type'];
+                        $tamanoArchivo=$_FILES['avatar']['size'];
+                        $rutaTemporal=$_FILES['avatar']['tmp_name'];
+                        //validamos tipos de archivos permitidos
+                        $extenciones=array('jpg','jpeg','png');
+                        $extencion=pathinfo($nombreArchivo,PATHINFO_EXTENSION);
+                        if(!in_array($extencion,$extenciones)){
+                            echo "El fomato de la imagen no es valido";
+
+                            exit;
+                        }
+                        //definimos el tamaño de la imagen a cargar
+                        $tamanomax=2*1024*1024;
+                        if($tamanoArchivo>$tamanomax){
+                            echo "ya mejor sube un video o una lona no mms";
+                            exit;
+                        }
+                        //definimos el nombre que va a tener nuestro archivo
+                        $nombreArchivo=uniqid('Avatar_').'.'.$extencion;
+                        //definimos la ruta destino
+                        $rutadestino="app/src/img/avatars/".$nombreArchivo;
+                        
+                        if(!move_uploaded_file($rutaTemporal,$rutadestino)){
+                            echo "Error al momento de cargar la imagen al servidor";
+                            exit;
+                        }
+                        $datos['Avatar']=$nombreArchivo;
+                    }
+
                     //llamamos al metodo del modelo que agrega al usuario a la base de datos
                     $modelo=new UserModel();
-                    $modelo->insert($datos);
+                    $res=$modelo->insert($datos);
+                    //podriamos poner un if que dependiendo de si se inserto o no va a 
+                    //redireccionar a la pantalla de index con los datos actualizados o 
+                    //me regresa al formulario para reintentar
                     //redireccionamos al index de usuarios
                     header("Location:http://localhost/php3a/?c=UserController&m=index");
             }
@@ -66,11 +103,50 @@ include_once("app/Model/UserModel.php");
                     'Usuario'=>$_POST['user'],
                     'Password'=>$_POST['password'],
                     'Sexo'=>$_POST['sexo'],
-                    'FchNacimiento'=>$_POST['fchnac']
+                    'FchNacimiento'=>$_POST['fchnac'],
+                    'Avatar'=>$_POST['avatar']
                 );
+
+                 //rescatamos la imagen y la procesamos 
+                 if(isset($_FILES['avatar']) && $_FILES['avatar']['error']===UPLOAD_ERR_OK){
+                    //obtenemos los datos de la imagen que  cargamos en el formulario
+                    $nombreArchivo=$_FILES['avatar']['name'];
+                    $tipoArchivo=$_FILES['avatar']['type'];
+                    $tamanoArchivo=$_FILES['avatar']['size'];
+                    $rutaTemporal=$_FILES['avatar']['tmp_name'];
+                    //validamos tipos de archivos permitidos
+                    $extenciones=array('jpg','jpeg','png');
+                    $extencion=pathinfo($nombreArchivo,PATHINFO_EXTENSION);
+                    if(!in_array($extencion,$extenciones)){
+                        echo "El fomato de la imagen no es valido";
+                        exit;
+                    }
+                    //definimos el tamaño de la imagen a cargar
+                    $tamanomax=2*1024*1024;
+                    if($tamanoArchivo>$tamanomax){
+                        echo "ya mejor sube un video o una lona no mms";
+                        exit;
+                    }
+                    //definimos el nombre que va a tener nuestro archivo
+                    $nombreArchivo=uniqid('Avatar_').'.'.$extencion;
+                    //definimos la ruta destino
+                    $rutadestino="app/src/img/avatars/".$nombreArchivo;
+                    if(!move_uploaded_file($rutaTemporal,$rutadestino)){
+                        echo "Error al momento de cargar la imagen al servidor";
+                        exit;
+                    }
+                    //borramos la imagen anterior
+                    $this->modelo=new UserModel();
+                    $anterior=$this->modelo->getById($_POST['id']);
+                    if(!empty($anterior['Avatar'])){
+                        unlink('app/src/img/avatars/'.$anterior['Avatar']);
+                    }
+                    $datos['Avatar']=$nombreArchivo;
+                }
+
                 //llamamos al metodo del modelo que actualiza los datos del usuario
                 $modelo=new UserModel();
-                $modelo->update($datos);
+                $res=$modelo->update($datos);
                 //redireccionamos al index de usuarios
                 header("Location:http://localhost/php3a/?c=UserController&m=index");
             }

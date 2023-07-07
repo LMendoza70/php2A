@@ -96,9 +96,9 @@
         // metodo para insertar un usuario
         public function insert($user){
             //paso1 creamos la consulta
-            $sql="INSERT INTO user(Nombre, ApPaterno, ApMaterno, Usuario, Password, Sexo, FchNacimiento) 
+            $sql="INSERT INTO user(Nombre, ApPaterno, ApMaterno, Usuario, Password, Sexo, FchNacimiento,Avatar ) 
             VALUES('".$user['Nombre']."','".$user['ApPaterno']."','".$user['ApMaterno']."',
-            '".$user['Usuario']."','".$user['Password']."','".$user['Sexo']."','".$user['FchNacimiento']."')";
+            '".$user['Usuario']."','".$user['Password']."','".$user['Sexo']."','".$user['FchNacimiento']."','".$user['Avatar']."')";
             //paso 2 conectamos a la base de datos
             $connection =$this->dbconnection->getConnection();
             //paso 3 ejecutamos la consulta
@@ -118,7 +118,7 @@
         //metodo para editar un usuario
         public function update($user){
             //paso1 creamos la consulta
-            $sql="UPDATE user SET Nombre='".$user['Nombre']."', ApPaterno='".$user['ApPaterno']."', 
+            $sql="UPDATE user SET Avatar='".$user['Avatar']."',Nombre='".$user['Nombre']."', ApPaterno='".$user['ApPaterno']."', 
             ApMaterno='".$user['ApMaterno']."', Usuario='".$user['Usuario']."', Password='".$user['Password']."', 
             Sexo='".$user['Sexo']."', FchNacimiento='".$user['FchNacimiento']."' WHERE IdUser=".$user['IdUser'];
             //paso 2 conectamos a la base de datos
