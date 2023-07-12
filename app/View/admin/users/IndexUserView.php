@@ -11,40 +11,41 @@
   <br>
   <table border=1>
     <thead>
-      <tr><td>Nombre</td>
-      <td>A Paterno</td>
-      <td>A Materno</td>
-      <td>Usuario</td>
-      <td>Acciones</td>
+      <tr>
+        <td>Nombre</td>
+        <td>A Paterno</td>
+        <td>A Materno</td>
+        <td>Usuario</td>
+        <td>Acciones</td>
       </tr>
     </thead>
     <tbody>
       <?php
-       foreach($datos as $dato){
+      foreach ($datos as $dato) {
         echo "<tr>";
-        echo "<td>" . $dato['Nombre'] ."</td>";
-        echo "<td>" . $dato['ApPaterno'] ."</td>";
-        echo "<td>" . $dato['ApMaterno'] ."</td>";
-        echo "<td>" . $dato['Usuario'] ."</td>";
-        echo "<td> <button onclick='editar(".$dato['IdUser'].")'>Editar</button><br>
-        <button onclick='eliminar(".$dato['IdUser'].")'>Eliminar</button> </td>";
+        echo "<td>" . $dato['Nombre'] . "</td>";
+        echo "<td>" . $dato['ApPaterno'] . "</td>";
+        echo "<td>" . $dato['ApMaterno'] . "</td>";
+        echo "<td>" . $dato['Usuario'] . "</td>";
+        echo "<td> <button onclick='editar(" . $dato['IdUser'] . ")'>Editar</button><br>
+        <button onclick='eliminar(" . $dato['IdUser'] . ")'>Eliminar</button> </td>";
         echo "</tr>";
-       }
+      }
       ?>
     </tbody>
   </table>
 
   <script>
     //creamos la funcion para eliminar un usuario por medio de su id y confirmamos si se desea eliminar
-    function eliminar(id){
-      if(confirm("¿Desea eliminar el usuario?")){
-        window.location.href="http://localhost/php3a/?c=UserController&m=Delete&id="+id;
-        
+    function eliminar(id) {
+      if (confirm("¿Desea eliminar el usuario?")) {
+        window.location.href = "http://localhost/php3a/?c=UserController&m=Delete&id=" + id;
+
       }
     }
     //creamos la funcion para editar un usuario por medio de su id
-    function editar(id){
-      window.location.href="http://localhost/php3a/?c=UserController&m=CallFormEdit&id="+id;
+    function editar(id) {
+      window.location.href = "http://localhost/php3a/?c=UserController&m=CallFormEdit&id=" + id;
     }
   </script>
 </div>

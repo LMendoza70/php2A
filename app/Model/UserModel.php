@@ -55,7 +55,7 @@
         //metodo para validar un logueo (usuario y contraseña)
         public function getCredentials($us, $ps){
             //paso1 creamos la consulta
-            $sql="SELECT * FROM user WHERE Usuario=$us AND Password=$ps";
+            $sql="SELECT * FROM user WHERE Usuario='$us' AND Password='$ps'";
             //paso 2 conectamos a la base de datos
             $connection =$this->dbconnection->getConnection();
             //paso 3 ejecutamos la consulta
@@ -158,4 +158,3 @@
         }
             
     }
-?>
